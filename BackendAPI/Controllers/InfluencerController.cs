@@ -19,6 +19,11 @@ namespace BackendAPI.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Gets all Influencers
+        /// </summary>
+        /// <returns>List of all Influencers</returns>
+
         // GET: api/Influencer - Retrieves a list of all influencers
         [HttpGet]
         public async Task<IActionResult> GetInfluencers()
@@ -29,6 +34,12 @@ namespace BackendAPI.Controllers
                 .ToListAsync(); // Asynchronously retrieves all influencers from the database and returns them as a list
             return Ok(influencers); // Returns an HTTP 200 OK response with the list of influencers in the response body
         }
+
+        /// <summary>
+        /// Get an Influencer By ID
+        /// </summary>
+        /// <param name="id">The Influencers unique identifier</param>
+        /// <returns></returns>
 
         // GET: api/Influencer/{id} - Retrieves a specific influencer by their unique identifier (ID)
         [HttpGet("{id}")]
@@ -46,6 +57,12 @@ namespace BackendAPI.Controllers
             return Ok(influencer);
         }
 
+        /// <summary>
+        /// Get an Influencer by display name
+        /// </summary>
+        /// <param name="displayName">The Influencers display name</param>
+        /// <returns>Returns a single influencer</returns>
+
         // GET: api/Influencer/username/{displayName} - Retrieves a specific influencer by their display name
         [HttpGet("username/{displayName}")]
         public async Task<IActionResult> GetInfluencerByUsername(string displayName)
@@ -54,6 +71,7 @@ namespace BackendAPI.Controllers
                 .Include(i => i.Niche)
                 .Include(i => i.Market)
                 .FirstOrDefaultAsync(i => i.DisplayName == displayName);
+
             if (influencer == null)
             {
                 _logger.LogInformation("Influencer with DisplayName {DisplayName} not found.", displayName);
@@ -61,6 +79,12 @@ namespace BackendAPI.Controllers
             }
             return Ok(influencer);
         }
+
+        /// <summary>
+        /// Deletes an influencer by ID
+        /// </summary>
+        /// <param name="guid">The influencers unique identifier</param>
+        /// <returns></returns>
 
         // DELETE: api/Influencer/{guid} - Deletes a specific influencer by their unique identifier (ID)
         [HttpDelete("{guid}")]
@@ -76,6 +100,12 @@ namespace BackendAPI.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+
+        /// <summary>
+        /// Creates a new influencer
+        /// </summary>
+        /// <param name="influencer">The influencer object to create</param>
+        /// <returns>The created influencer object</returns>
 
         // POST: api/Influencer - Creates a new influencer with the provided data
         [HttpPost]
@@ -115,11 +145,19 @@ namespace BackendAPI.Controllers
             return CreatedAtAction(nameof(GetInfluencerById), new { id = influencerEntity.Id }, influencerEntity);
         }
 
+        /// <summary>
+        /// Updates an existing influencer
+        /// </summary>
+        /// <param name="influencerEntity">The updated influencer object</param>
+        /// <param name="id">The influencers unique identifier</param>
+        /// <returns></returns>
+
         // PUT: api/Influencer - Updates an existing influencer's information based on the provided data
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateInfluencerInformation(Guid id, [FromBody] Influencer InfluencerEntity)
+
         {
-            var existingInfluencer = await _context.Influencers.FindAsync(influencerEntity.id);
+            var existingInfluencer = await _context.Influencers.FindAsync(id);
             if (existingInfluencer == null)
             {
                 _logger.LogInformation("Influencer with ID {id} not found for update.", id);
