@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore.Design;
 namespace BackendAPI.Data
 {
     // This factory is used by EF Core at design-time (for migrations)
-    public class AppDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
+    public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
-        public ApplicationDbContext CreateDbContext(string[] args)
+        public AppDbContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
             // Use the same connection string as in appsettings.json
             optionsBuilder.UseSqlServer("Server=localhost;Database=InfluencerDb;Trusted_Connection=True;TrustServerCertificate=True;");
 
-            return new ApplicationDbContext(optionsBuilder.Options);
+            return new AppDbContext(optionsBuilder.Options);
         }
     }
 }
