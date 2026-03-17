@@ -38,8 +38,8 @@ namespace BackendAPI.Models
         [Required]
         public DateOnly EndDate { get; set; }
 
-        public Guid InfluencerId { get; set; }
-        public Influencer Influencer { get; set; }
+        public Guid? InfluencerId { get; set; }
+        public Influencer? Influencer { get; set; }
 
     }
 }
