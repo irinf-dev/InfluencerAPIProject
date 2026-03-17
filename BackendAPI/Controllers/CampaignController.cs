@@ -108,17 +108,17 @@ namespace BackendAPI.Controllers
 
         // PUT: api/Campaign - Updates an existing campaign
         [HttpPut]
-        public async Task<IActionResult> UpdateCampaign([FromBody] Campaign campaign)
+        public async Task<IActionResult> UpdateCampaign(Guid id, [FromBody] Campaign campaign)
         {
-            if (campaign == null || campaign.Id == Guid.Empty)
-            {
-                _logger.LogWarning("Received invalid campaign object for update.");
-                return BadRequest("Valid campaign data with ID is required.");
-            }
-            var existingCampaign = await _context.Campaigns.FindAsync(campaign.Id);
+            //if (campaign == null)
+            //{
+            //    _logger.LogWarning("Received invalid campaign object for update.");
+            //    return BadRequest("Valid campaign data with ID is required.");
+            //}
+            var existingCampaign = await _context.Campaigns.FindAsync(id);
             if (existingCampaign == null)
             {
-                _logger.LogWarning("Campaign with ID {Id} not found for update.", campaign.Id);
+                _logger.LogWarning("Campaign with ID {Id} not found for update.", id);
                 return NotFound();
             }
             existingCampaign.Title = campaign.Title;
