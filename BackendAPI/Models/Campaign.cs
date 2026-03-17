@@ -83,7 +83,7 @@ namespace BackendAPI.Models
         /// Influencer ID
         /// </summary>
 
-        public Guid InfluencerId { get; set; } //Look into allowing the InfluencerId to be nullable just in case a campaign doesn't have an influencer yet
+        public Guid? InfluencerId { get; set; } //Look into allowing the InfluencerId to be nullable just in case a campaign doesn't have an influencer yet
         public Influencer? Influencer { get; set; }
 
         //Look into adding a name field 
