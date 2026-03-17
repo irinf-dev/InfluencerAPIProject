@@ -34,14 +34,14 @@ namespace BackendAPI.Controllers
         /// <summary>
         /// Get Market by ID
         /// </summary>
-        /// <param name="Id">The unique identifier of the Market</param>
+        /// <param name="id">The unique identifier of the Market</param>
         /// <returns>Returns a single Market record</returns>
         
         // GET: api/Markets/{id} - Retrieves a market by ID
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetMarketById(int Id)
+        public async Task<IActionResult> GetMarketById(int id)
         {
-            var markets = await _context.Markets.FindAsync(Id);
+            var markets = await _context.Markets.FindAsync(id);
             return Ok(markets);
         }
 
@@ -101,7 +101,7 @@ namespace BackendAPI.Controllers
 
             if (existingMarket == null)
             {
-                _logger.LogWarning("Market with ID {Id} not found for update.", id);
+                _logger.LogWarning("Market with ID {id} not found for update.", id);
                 return NotFound();
             }
 

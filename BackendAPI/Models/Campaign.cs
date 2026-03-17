@@ -7,12 +7,14 @@ namespace BackendAPI.Models
     [Index(nameof(Title), IsUnique = true)]
     public class Campaign
     {
+
         /// <summary>
-        /// The unique identifier for the campaign.
+        /// The unique identifier for the campaign
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+
 
         /// <summary>
         /// The title of the campaign
@@ -20,8 +22,9 @@ namespace BackendAPI.Models
         [Required]
         public string Title { get; set; }
 
+
         /// <summary>
-        /// The campaigns description
+        /// The description of the campaign
         /// </summary>
         [Required]
         public string Description { get; set; }
@@ -79,8 +82,11 @@ namespace BackendAPI.Models
         /// <summary>
         /// Influencer ID
         /// </summary>
-        public Guid? InfluencerId { get; set; }
+
+        public Guid InfluencerId { get; set; } //Look into allowing the InfluencerId to be nullable just in case a campaign doesn't have an influencer yet
         public Influencer? Influencer { get; set; }
+
+        //Look into adding a name field 
 
 
     }

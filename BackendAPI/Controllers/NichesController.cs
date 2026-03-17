@@ -84,7 +84,7 @@ namespace BackendAPI.Controllers
             var niche = await _context.Niches.FindAsync(id);
             if (niche == null)
             {
-                _logger.LogWarning("Niche with ID {Id} not found for deletion.", id);
+                _logger.LogWarning("Niche with ID {id} not found for deletion.", id);
                 return NotFound();
             }
             _context.Niches.Remove(niche);
@@ -106,7 +106,7 @@ namespace BackendAPI.Controllers
             var existingNiche = await _context.Niches.FindAsync(id);
             if (existingNiche == null)
             {
-                _logger.LogWarning("Niche with ID {Id} not found for update.", id);
+                _logger.LogWarning("Niche with ID {id} not found for update.", id);
                 return NotFound();
             }
 
