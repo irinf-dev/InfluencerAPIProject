@@ -117,12 +117,12 @@ namespace BackendAPI.Controllers
 
         // PUT: api/Influencer - Updates an existing influencer's information based on the provided data
         [HttpPut]
-        public async Task<IActionResult> UpdateInfluencerInformation(Influencer influencerEntity)
+        public async Task<IActionResult> UpdateInfluencerInformation(Guid id, [FromBody] Influencer InfluencerEntity)
         {
-            var existingInfluencer = await _context.Influencers.FindAsync(influencerEntity.Id);
+            var existingInfluencer = await _context.Influencers.FindAsync(influencerEntity.id);
             if (existingInfluencer == null)
             {
-                _logger.LogInformation("Influencer with ID {Id} not found for update.", influencerEntity.Id);
+                _logger.LogInformation("Influencer with ID {id} not found for update.", id);
                 return NotFound();
             }
 
