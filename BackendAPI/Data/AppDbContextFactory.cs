@@ -11,7 +11,7 @@ namespace BackendAPI.Data
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 
             // Use the same connection string as in appsettings.json
-            optionsBuilder.UseSqlServer("Server=localhost;Database=InfluencerDb;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=Influencers;Trusted_Connection=True;TrustServerCertificate=True;");
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }

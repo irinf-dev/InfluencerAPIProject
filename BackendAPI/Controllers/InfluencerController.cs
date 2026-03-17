@@ -51,7 +51,7 @@ namespace BackendAPI.Controllers
                 .FirstOrDefaultAsync(i => i.Id == id);
             if (influencer == null)
             {
-                _logger.LogInformation("Influencer with ID {Id} not found.", id);
+                _logger.LogInformation("Influencer with ID {id} not found.", id);
                 return NotFound();
             }
             return Ok(influencer);
@@ -74,7 +74,7 @@ namespace BackendAPI.Controllers
 
             if (influencer == null)
             {
-                _logger.LogInformation("Influencer with DisplayName {DisplayName} not found.", displayName);
+                _logger.LogInformation("Influencer with DisplayName {displayName} not found.", displayName);
                 return NotFound();
             }
             return Ok(influencer);
@@ -83,17 +83,17 @@ namespace BackendAPI.Controllers
         /// <summary>
         /// Deletes an influencer by ID
         /// </summary>
-        /// <param name="guid">The influencers unique identifier</param>
+        /// <param name="id">The influencers unique identifier</param>
         /// <returns></returns>
         
         // DELETE: api/Influencer/{guid} - Deletes a specific influencer by their unique identifier (ID)
-        [HttpDelete("{guid}")]
-        public async Task<IActionResult> DeleteInfluencerById(Guid guid)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteInfluencerById(Guid id)
         {
-            var influencer = await _context.Influencers.FindAsync(guid);
+            var influencer = await _context.Influencers.FindAsync(id);
             if (influencer == null)
             {
-                _logger.LogInformation("Influencer with ID {Id} not found for deletion.", guid);
+                _logger.LogInformation("Influencer with ID {id} not found for deletion.", id);
                 return NotFound();
             }
             _context.Influencers.Remove(influencer);
@@ -151,15 +151,15 @@ namespace BackendAPI.Controllers
         /// <param name="influencerEntity">The updated influencer object</param>
         /// <param name="id">The influencers unique identifier</param>
         /// <returns></returns>
-        
+
         // PUT: api/Influencer - Updates an existing influencer's information based on the provided data
-        [HttpPut]
-        public async Task<IActionResult> UpdateInfluencerInformation(Guid id, Influencer influencerEntity)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateInfluencerInformation(Guid id, [FromBody] Influencer influencerEntity)
         {
-            var existingInfluencer = await _context.Influencers.FindAsync(influencerEntity.Id);
+            var existingInfluencer = await _context.Influencers.FindAsync(id);
             if (existingInfluencer == null)
             {
-                _logger.LogInformation("Influencer with ID {Id} not found for update.", influencerEntity.Id);
+                _logger.LogInformation("Influencer with ID {id} not found for update.", id);
                 return NotFound();
             }
 
