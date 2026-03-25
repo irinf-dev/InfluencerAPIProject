@@ -18,23 +18,42 @@ namespace BackendAPI.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Gets all Campaigns
+        /// </summary>
+        /// <returns>List of all campaigns</returns>
+
         // GET: api/Campaign - Retrieves a list of all campaigns
         [HttpGet]
         public async Task<IActionResult> GetCampaign()
         {
             var campaigns = await _context.Campaigns
                 .Include(c => c.Influencer)
+                    .ThenInclude(i => i.Niche)
+                .Include(c => c.Influencer)
+                    .ThenInclude(i => i.Market)
                 .ToListAsync(); // Asynchronously retrieves all campaigns from the database and returns them as a list
+            
             return Ok(campaigns); // Returns an HTTP 200 OK response with the list of campaigns in the response body
         }
 
+        /// <summary>
+        /// Gets a campaign by name
+        /// </summary>
+        /// <param name="campaignName">The name of the campaign you want to return</param>
+        /// <returns>A single campaign</returns>
+
         // GET: api/Campaign/campaign/{campaignName} - Retrieves a campaign by its name
-        [HttpGet("campaign/{campaignName}")]
+        [HttpGet("{campaignName}")]
         public async Task<IActionResult> GetCampaignByName(string campaignName)
         {
             var campaign = await _context.Campaigns
                 .Include(i => i.Influencer)
+                    .ThenInclude(i => i.Niche)
+                .Include(i => i.Influencer)
+                    .ThenInclude(i => i.Market)
                 .FirstOrDefaultAsync(c => c.Title == campaignName); // Asynchronously retrieves the first campaign from the database that matches the specified campaign name. If no campaign is found, it returns null.
+            
             if (campaign == null)
             {
                 _logger.LogWarning("Campaign with name {CampaignName} not found.", campaignName);
@@ -43,13 +62,23 @@ namespace BackendAPI.Controllers
             return Ok(campaign);
         }
 
+        /// <summary>
+        /// Gets a campain by id
+        /// </summary>
+        /// <param name="id">The campaigns unique identifier</param>
+        /// <returns>A single campaign</returns>
+
         // GET: api/Campaign/{id} - Retrieves a campaign by its ID
-        [HttpGet("{id}")]
+        [HttpGet("{id:Guid}")]
         public async Task<IActionResult> GetCampaignById(Guid id)
         {
             var campaign = await _context.Campaigns
                 .Include(i => i.Influencer)
-                .FirstOrDefaultAsync(c => c.InfluencerId == id);
+                    .ThenInclude(i => i.Niche)
+                .Include(i => i.Influencer)
+                    .ThenInclude(i => i.Market)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             if (campaign == null)
             {
                 _logger.LogWarning("Campaign with ID {Id} not found.", id);
@@ -57,6 +86,12 @@ namespace BackendAPI.Controllers
             }
             return Ok(campaign);
         }
+
+        /// <summary>
+        /// Deletes a campaign by ID
+        /// </summary>
+        /// <param name="id">The campaigns unique identifier</param>
+        /// <returns></returns>
 
         // DELETE: api/Campaign/{id} - Retrieves a campaign by its ID and DELETES it from the database
         [HttpDelete("{id}")]
@@ -73,6 +108,12 @@ namespace BackendAPI.Controllers
             _logger.LogInformation("Campaign with ID {Id} deleted successfully.", id);
             return NoContent();
         }
+
+        /// <summary>
+        /// Creates a new campaign
+        /// </summary>
+        /// <param name="campaign">The campaign object to create</param>
+        /// <returns>The created campaign object</returns>
 
         // POST: api/Campaign - Creates a new campaign
         [HttpPost]
@@ -106,19 +147,21 @@ namespace BackendAPI.Controllers
             return CreatedAtAction(nameof(GetCampaignById), new { id = campaignEntity.Id }, campaignEntity);
         }
 
+        /// <summary>
+        /// Updates an existing campaign
+        /// </summary>
+        /// <param name="campaign">The updated campaign object</param>
+        /// <param name="id">The ID of the campaign object you would like to update</param>
+        /// <returns></returns>
+
         // PUT: api/Campaign - Updates an existing campaign
-        [HttpPut]
-        public async Task<IActionResult> UpdateCampaign([FromBody] Campaign campaign)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCampaign(Guid id, [FromBody] Campaign campaign)
         {
-            if (campaign == null || campaign.Id == Guid.Empty)
-            {
-                _logger.LogWarning("Received invalid campaign object for update.");
-                return BadRequest("Valid campaign data with ID is required.");
-            }
-            var existingCampaign = await _context.Campaigns.FindAsync(campaign.Id);
+            var existingCampaign = await _context.Campaigns.FindAsync(id);
             if (existingCampaign == null)
             {
-                _logger.LogWarning("Campaign with ID {Id} not found for update.", campaign.Id);
+                _logger.LogWarning("Campaign with ID {id} not found for update.", id);
                 return NotFound();
             }
             existingCampaign.Title = campaign.Title;

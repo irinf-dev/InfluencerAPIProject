@@ -18,6 +18,12 @@ namespace BackendAPI.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Get all Markets
+        /// </summary>
+        /// <returns>List of all Markets</returns>
+        
+        // GET: api/Markets - Retrieves a list of all Markets
         [HttpGet]
         public async Task<IActionResult> GetMarkets()
         {
@@ -25,6 +31,27 @@ namespace BackendAPI.Controllers
             return Ok(markets);
         }
 
+        /// <summary>
+        /// Get Market by ID
+        /// </summary>
+        /// <param name="id">The unique identifier of the Market</param>
+        /// <returns>Returns a single Market record</returns>
+        
+        // GET: api/Markets/{id} - Retrieves a market by ID
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetMarketById(int id)
+        {
+            var markets = await _context.Markets.FindAsync(id);
+            return Ok(markets);
+        }
+
+        /// <summary>
+        /// Creates a new Market
+        /// </summary>
+        /// <param name="market">The market object to create</param>
+        /// <returns>The created Market object</returns>
+        
+        // POST: api/Markets - Creates a new Market
         [HttpPost]
         public async Task<IActionResult> CreateMarket([FromBody] Markets market)
         {
@@ -39,6 +66,13 @@ namespace BackendAPI.Controllers
             return Ok(market);
         }
 
+        /// <summary>
+        /// Deletes a market by ID
+        /// </summary>
+        /// <param name="id">The Markets unique identifier</param>
+        /// <returns></returns>
+        
+        // DELETE: api/Markets/{id} - Deletes a Market by ID
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMarket(int id)
         {
@@ -52,6 +86,14 @@ namespace BackendAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Updates a Market
+        /// </summary>
+        /// <param name="id">The Markets unique identifier</param>
+        /// <param name="market">The updated Market onject</param>
+        /// <returns></returns>
+
+        // PUT: api/Markets/{id} - Updates a Market by ID
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateMarket(int id, [FromBody] Markets market)
         {
@@ -59,7 +101,7 @@ namespace BackendAPI.Controllers
 
             if (existingMarket == null)
             {
-                _logger.LogWarning("Market with ID {Id} not found for update.", id);
+                _logger.LogWarning("Market with ID {id} not found for update.", id);
                 return NotFound();
             }
 

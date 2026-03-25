@@ -18,6 +18,12 @@ namespace BackendAPI.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Gets all Niches
+        /// </summary>
+        /// <returns>List of all Niches</returns>
+
+        // GET: api/Niches - Retrieves a list of all Niches
         [HttpGet]
         public async Task<IActionResult> GetNiches()
         {
@@ -25,6 +31,13 @@ namespace BackendAPI.Controllers
             return Ok(niches);
         }
 
+        /// <summary>
+        /// Gets a Niche by id
+        /// </summary>
+        /// <param name="id">The Niches unique identifier</param>
+        /// <returns>A single Niche</returns>
+        
+        // GET: api/Niches/{id} - Retrieves a Niche by its ID
         [HttpGet("{id}")]
         public async Task<IActionResult> GetNicheById(int id)
         {
@@ -37,6 +50,13 @@ namespace BackendAPI.Controllers
             return Ok(niche);
         }
 
+        /// <summary>
+        /// Creates a new Niche
+        /// </summary>
+        /// <param name="niche">The Niche object to create</param>
+        /// <returns>The created Niche object</returns>
+        
+        // POST: api/Niches - Creates a new Niche
         [HttpPost]
         public async Task<IActionResult> CreateNiche([FromBody] Niches niche)
         {
@@ -51,13 +71,20 @@ namespace BackendAPI.Controllers
             return Ok(niche);
         }
 
+        /// <summary>
+        /// Delete a Niche By ID
+        /// </summary>
+        /// <param name="id">The unique identifier of the Niche</param>
+        /// <returns></returns>
+        
+        // DELETE: api/Niches/{id} - Delete a Niche by ID
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNiche(int id)
         {
             var niche = await _context.Niches.FindAsync(id);
             if (niche == null)
             {
-                _logger.LogWarning("Niche with ID {Id} not found for deletion.", id);
+                _logger.LogWarning("Niche with ID {id} not found for deletion.", id);
                 return NotFound();
             }
             _context.Niches.Remove(niche);
@@ -65,13 +92,21 @@ namespace BackendAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Update a Niche 
+        /// </summary>
+        /// <param name="id">The Niches unique identifier</param>
+        /// <param name="niche">The Niche Object</param>
+        /// <returns>The update Niche object</returns>
+        
+        // PUT: api/Niche/{id} - Update a Niche Object
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateNiche(int id, [FromBody] Niches niche)
         {
             var existingNiche = await _context.Niches.FindAsync(id);
             if (existingNiche == null)
             {
-                _logger.LogWarning("Niche with ID {Id} not found for update.", id);
+                _logger.LogWarning("Niche with ID {id} not found for update.", id);
                 return NotFound();
             }
 
