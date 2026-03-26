@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BackendAPI.Models
 {
     [Index(nameof(DisplayName), IsUnique = true)]
-    public class Influencer
+    public class Influencer 
     {
         ///<summary>
         /// The unique identifier for the influencer. This value can be left out because it is database generated

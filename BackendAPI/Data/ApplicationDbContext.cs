@@ -11,5 +11,8 @@ namespace BackendAPI.Data
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Markets> Markets { get; set; }
         public DbSet<Niches> Niches { get; set; }
+        public DbSet<Report> Reports { get; set; }
+        public DbSet<MessageTemplate> MessageTemplates { get; set; }
+
     }
 }
