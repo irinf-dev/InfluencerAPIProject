@@ -23,7 +23,7 @@ namespace BackendAPI.Controllers
         /// Gets all Influencers
         /// </summary>
         /// <returns>List of all Influencers</returns>
-
+        
         // GET: api/Influencer - Retrieves a list of all influencers
         [HttpGet]
         public async Task<IActionResult> GetInfluencers()
@@ -40,7 +40,7 @@ namespace BackendAPI.Controllers
         /// </summary>
         /// <param name="id">The Influencers unique identifier</param>
         /// <returns></returns>
-
+        
         // GET: api/Influencer/{id} - Retrieves a specific influencer by their unique identifier (ID)
         [HttpGet("{id}")]
         public async Task<IActionResult> GetInfluencerById(Guid id)
@@ -62,7 +62,7 @@ namespace BackendAPI.Controllers
         /// </summary>
         /// <param name="displayName">The Influencers display name</param>
         /// <returns>Returns a single influencer</returns>
-
+        
         // GET: api/Influencer/username/{displayName} - Retrieves a specific influencer by their display name
         [HttpGet("username/{displayName}")]
         public async Task<IActionResult> GetInfluencerByUsername(string displayName)
@@ -85,7 +85,7 @@ namespace BackendAPI.Controllers
         /// </summary>
         /// <param name="id">The influencers unique identifier</param>
         /// <returns></returns>
-
+        
         // DELETE: api/Influencer/{guid} - Deletes a specific influencer by their unique identifier (ID)
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteInfluencerById(Guid id)
@@ -106,7 +106,7 @@ namespace BackendAPI.Controllers
         /// </summary>
         /// <param name="influencer">The influencer object to create</param>
         /// <returns>The created influencer object</returns>
-
+        
         // POST: api/Influencer - Creates a new influencer with the provided data
         [HttpPost]
         public async Task<IActionResult> CreateInfluencer([FromBody] Influencer influencer)

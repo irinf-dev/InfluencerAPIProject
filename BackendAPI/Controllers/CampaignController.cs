@@ -155,7 +155,6 @@ namespace BackendAPI.Controllers
         /// <returns></returns>
 
         // PUT: api/Campaign - Updates an existing campaign
-
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCampaign(Guid id, [FromBody] Campaign campaign)
         {
