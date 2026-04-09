@@ -163,6 +163,7 @@ namespace BackendAPI.Controllers
                 return NotFound();
             }
 
+
             existingInfluencer.Name = influencerEntity.Name;
             existingInfluencer.DisplayName = influencerEntity.DisplayName;
             existingInfluencer.Platfrom = influencerEntity.Platfrom;

@@ -32,7 +32,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //Register the service using AddScoped. This creates a single instance of the service per request.
 builder.Services.AddScoped<IEmailService, EmailService>();
-
+//registered http client for fb
+//builder service
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
