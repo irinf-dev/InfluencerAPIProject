@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendAPI.Models
+namespace BackendAPI.Models.Entities
 { 
     [Index(nameof(Title), IsUnique = true)]
     public class Campaign

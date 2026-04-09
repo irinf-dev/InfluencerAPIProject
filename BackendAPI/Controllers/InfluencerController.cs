@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BackendAPI.Data;
-using BackendAPI.Models;
+using BackendAPI.Models.Entities;
 
 namespace BackendAPI.Controllers
 {
@@ -135,7 +135,7 @@ namespace BackendAPI.Controllers
                 EngagementRate = influencer.EngagementRate,
                 Email = influencer.Email,
                 InstagramHandle = influencer.InstagramHandle,
-                TwitterHandle = influencer.TwitterHandle,
+                FacebookHandle = influencer.FacebookHandle,
                 TikTokHandle = influencer.TikTokHandle,
                 YouTubeHandle = influencer.YouTubeHandle
             };
@@ -172,7 +172,7 @@ namespace BackendAPI.Controllers
             existingInfluencer.EngagementRate = influencerEntity.EngagementRate;
             existingInfluencer.Email = influencerEntity.Email;
             existingInfluencer.InstagramHandle = influencerEntity.InstagramHandle;
-            existingInfluencer.TwitterHandle = influencerEntity.TwitterHandle;
+            existingInfluencer.FacebookHandle = influencerEntity.FacebookHandle;
             existingInfluencer.TikTokHandle = influencerEntity.TikTokHandle;
             existingInfluencer.YouTubeHandle = influencerEntity.YouTubeHandle;
 

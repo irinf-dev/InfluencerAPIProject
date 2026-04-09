@@ -2,23 +2,23 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendAPI.Models
+namespace BackendAPI.Models.Entities
 {
-    [Index(nameof(NicheName), IsUnique = true)]
-    public class Niches
+    [Index(nameof(MarketName), IsUnique = true)]
+    public class Markets
     {
         /// <summary>
-        /// The unique identifier for Niches
+        /// The unique identifier for Markets
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>
-        /// Niche Name
+        /// Market name
         /// </summary>
         [Required]
         [StringLength(50)]
-        public string NicheName { get; set; }
+        public string MarketName { get; set; }
     }
 }

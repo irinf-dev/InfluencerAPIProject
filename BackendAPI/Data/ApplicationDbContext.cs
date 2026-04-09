@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BackendAPI.Models;
+using BackendAPI.Models.Entities;
 
 namespace BackendAPI.Data
 {
@@ -13,6 +14,6 @@ namespace BackendAPI.Data
         public DbSet<Niches> Niches { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<MessageTemplate> MessageTemplates { get; set; }
-
+        public DbSet<TikTokSnapshot> TikTokSnapshot { get; set; }
     }
 }

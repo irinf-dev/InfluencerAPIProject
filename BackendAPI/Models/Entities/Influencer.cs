@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendAPI.Models
+namespace BackendAPI.Models.Entities
 {
     [Index(nameof(DisplayName), IsUnique = true)]
     public class Influencer 
@@ -72,9 +72,9 @@ namespace BackendAPI.Models
 
         [MaxLength(150)]
         /// <summary>
-        /// The Influencers Twitter/X handle
+        /// The Influencers Facebook handle
         /// </summary>
-        public string TwitterHandle { get; set; }
+        public string FacebookHandle { get; set; }
 
         /// <summary>
         /// The influencers TikTok handle

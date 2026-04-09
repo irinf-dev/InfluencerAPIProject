@@ -1,4 +1,4 @@
-﻿namespace BackendAPI.Services
+﻿namespace BackendAPI.Services.Instagram
 {
     public class InstagramService
     {

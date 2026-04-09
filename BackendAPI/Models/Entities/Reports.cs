@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BackendAPI.Models
+namespace BackendAPI.Models.Entities
 {
     public class Report
     {

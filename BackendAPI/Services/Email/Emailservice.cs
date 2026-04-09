@@ -43,7 +43,10 @@ public class EmailService : IEmailService
 
         using (var client = new SmtpClient())
         {
+            // Use this if the email given to us is gmail acc
             await client.ConnectAsync("smtp.gmail.com", 587, false);
+            // uncomment this if its an outlook account
+            // await client.ConnectAsync("smtp.office365.com", 587, SecureSocketOptions.StartTls);
             await client.AuthenticateAsync("youremailaddress", "generatedpassword");
             await client.SendAsync(message);
             await client.DisconnectAsync(true);

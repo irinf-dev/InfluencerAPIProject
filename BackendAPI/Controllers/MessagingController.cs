@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using BackendAPI.Data;
 using BackendAPI.Models;
 using BackendAPI.Models.DTO;
+using BackendAPI.Services.Instagram;
+using BackendAPI.Models.Entities;
 
 namespace BackendAPI.Controllers
 {
