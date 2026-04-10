@@ -6,5 +6,5 @@
         public Guid CampaignId { get; set; }
         public Guid InfluencerId { get; set; }
         public string MessageType { get; set; }
-    }
+    } 
 }

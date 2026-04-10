@@ -7,16 +7,11 @@ namespace BackendAPI.Models
     [Index(nameof(Title), IsUnique = true)]
     public class Campaign
     {
-
-        /// <summary>
-        /// The unique identifier for the campaign
-        /// </summary>
+        // The unique identifier for the campaign
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-
-        /// <summary>
         /// The title of the campaign
         /// </summary>
         [Required]

@@ -1,15 +1,17 @@
-using BackendAPI.Data;
+﻿using BackendAPI.Data;
+using BackendAPI.Services; 
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
+// OpenAPI (keep this)
 builder.Services.AddOpenApi();
 
+// Swagger configuration (keep this)
 builder.Services.AddSwaggerGen(c =>
 {
     var xmlPath = Path.Combine(AppContext.BaseDirectory,
@@ -25,13 +27,18 @@ builder.Services.AddSwaggerGen(c =>
     }
 });
 
+// Database (keep this)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-//Register the service using AddScoped. This creates a single instance of the service per request.
+// Existing service (keep this)
 builder.Services.AddScoped<IEmailService, EmailService>();
+
+// 🔥 ADD YOUR YOUTUBE SERVICE HERE
+builder.Services.AddScoped<IYouTubeService, YoutubeService>();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
@@ -41,7 +48,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
-
 }
 
 app.UseHttpsRedirection();
